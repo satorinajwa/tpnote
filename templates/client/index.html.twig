@@ -9,7 +9,6 @@
 </head>
 <body>
     <h1>Hello</h1>
-
 <ul>
     {% for clt in clients %}
      <li class="list-group-item">
@@ -17,6 +16,7 @@
             </li>
     {% endfor %}
 </ul>
+
     {% block javascripts %}
         <script src="{{ asset('js/app.js') }}"></script>
     {% endblock %}

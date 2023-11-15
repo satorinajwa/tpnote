@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ClientRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ClientRepository::class)]
@@ -13,104 +11,54 @@ class Client
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
-    #[ORM\Column]
-    private ?int $ID_Client = null;
+    public ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Nom = null;
+    public ?string $Nom_Client = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Prénom = null;
+    public ?string $Prenom_Client = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $Adresse = null;
-
-    #[ORM\ManyToMany(targetEntity: ClientCompte::class, mappedBy: 'ID_Client')]
-    private Collection $clientid;
-
-    public function __construct()
-    {
-        $this->clientid = new ArrayCollection();
-    }
+    public ?string $Adresse_Client = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIDClient(): ?int
+    public function getNomClient(): ?string
     {
-        return $this->ID_Client;
+        return $this->Nom_Client;
     }
 
-    public function setIDClient(int $ID_Client): static
+    public function setNomClient(string $Nom_Client): static
     {
-        $this->ID_Client = $ID_Client;
+        $this->Nom_Client = $Nom_Client;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getPrenomClient(): ?string
     {
-        return $this->Nom;
+        return $this->Prenom_Client;
     }
 
-    public function setNom(string $Nom): static
+    public function setPrenomClient(string $Prenom_Client): static
     {
-        $this->Nom = $Nom;
+        $this->Prenom_Client = $Prenom_Client;
 
         return $this;
     }
 
-    public function getPrénom(): ?string
+    public function getAdresseClient(): ?string
     {
-        return $this->Prénom;
+        return $this->Adresse_Client;
     }
 
-    public function setPrénom(string $Prénom): static
+    public function setAdresseClient(string $Adresse_Client): static
     {
-        $this->Prénom = $Prénom;
-
-        return $this;
-    }
-
-    public function getAdresse(): ?string
-    {
-        return $this->Adresse;
-    }
-
-    public function setAdresse(string $Adresse): static
-    {
-        $this->Adresse = $Adresse;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, ClientCompte>
-     */
-    public function getClientid(): Collection
-    {
-        return $this->clientid;
-    }
-
-    public function addClientid(ClientCompte $clientid): static
-    {
-        if (!$this->clientid->contains($clientid)) {
-            $this->clientid->add($clientid);
-            $clientid->addIDClient($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClientid(ClientCompte $clientid): static
-    {
-        if ($this->clientid->removeElement($clientid)) {
-            $clientid->removeIDClient($this);
-        }
+        $this->Adresse_Client = $Adresse_Client;
 
         return $this;
     }

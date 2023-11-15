@@ -2,35 +2,34 @@
 
 namespace App\Entity;
 
-use App\Repository\CompteBancaireRepository;
+use App\Repository\ComptebancaireRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CompteBancaireRepository::class)]
-class CompteBancaire
+#[ORM\Entity(repositoryClass: ComptebancaireRepository::class)]
+class Comptebancaire
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $ID_Compte = null;
+    #[ORM\Column(length: 255)]
+    private ?string $ID_Compte = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $type_contrat = null;
+    private ?string $Type_Compte = null;
 
-    #[ORM\ManyToMany(targetEntity: ClientCompte::class, mappedBy: 'Id_Compte')]
-    private Collection $comptesclient;
+    #[ORM\Column(length: 255)]
+    private ?string $Solde = null;
 
-    #[ORM\ManyToMany(targetEntity: LigneCompte::class, mappedBy: 'id_compte')]
-    private Collection $lignecompte;
+    #[ORM\ManyToMany(targetEntity: CompteLigne::class, mappedBy: 'Id_Compte')]
+    private Collection $compteLignes;
 
     public function __construct()
     {
-        $this->comptesclient = new ArrayCollection();
-        $this->lignecompte = new ArrayCollection();
+        $this->compteLignes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -38,79 +37,64 @@ class CompteBancaire
         return $this->id;
     }
 
-    public function getIDCompte(): ?int
+    public function getIDCompte(): ?string
     {
         return $this->ID_Compte;
     }
 
-    public function setIDCompte(int $ID_Compte): static
+    public function setIDCompte(string $ID_Compte): static
     {
         $this->ID_Compte = $ID_Compte;
 
         return $this;
     }
 
-    public function getTypeContrat(): ?string
+    public function getTypeCompte(): ?string
     {
-        return $this->type_contrat;
+        return $this->Type_Compte;
     }
 
-    public function setTypeContrat(string $type_contrat): static
+    public function setTypeCompte(string $Type_Compte): static
     {
-        $this->type_contrat = $type_contrat;
+        $this->Type_Compte = $Type_Compte;
+
+        return $this;
+    }
+
+    public function getSolde(): ?string
+    {
+        return $this->Solde;
+    }
+
+    public function setSolde(string $Solde): static
+    {
+        $this->Solde = $Solde;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, ClientCompte>
+     * @return Collection<int, CompteLigne>
      */
-    public function getComptesclient(): Collection
+    public function getCompteLignes(): Collection
     {
-        return $this->comptesclient;
+        return $this->compteLignes;
     }
 
-    public function addComptesclient(ClientCompte $comptesclient): static
+    public function addCompteLigne(CompteLigne $compteLigne): static
     {
-        if (!$this->comptesclient->contains($comptesclient)) {
-            $this->comptesclient->add($comptesclient);
-            $comptesclient->addIdCompte($this);
+        if (!$this->compteLignes->contains($compteLigne)) {
+            $this->compteLignes->add($compteLigne);
+            $compteLigne->addIdCompte($this);
         }
 
         return $this;
     }
 
-    public function removeComptesclient(ClientCompte $comptesclient): static
+    public function removeCompteLigne(CompteLigne $compteLigne): static
     {
-        if ($this->comptesclient->removeElement($comptesclient)) {
-            $comptesclient->removeIdCompte($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, LigneCompte>
-     */
-    public function getLignecompte(): Collection
-    {
-        return $this->lignecompte;
-    }
-
-    public function addLignecompte(LigneCompte $lignecompte): static
-    {
-        if (!$this->lignecompte->contains($lignecompte)) {
-            $this->lignecompte->add($lignecompte);
-            $lignecompte->addIdCompte($this);
-        }
-
-        return $this;
-    }
-
-    public function removeLignecompte(LigneCompte $lignecompte): static
-    {
-        if ($this->lignecompte->removeElement($lignecompte)) {
-            $lignecompte->removeIdCompte($this);
+        if ($this->compteLignes->removeElement($compteLigne)) {
+            $compteLigne->removeIdCompte($this);
         }
 
         return $this;

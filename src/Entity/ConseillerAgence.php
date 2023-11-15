@@ -15,16 +15,16 @@ class ConseillerAgence
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'ID_Agence')]
-    private Collection $IdConseiller;
+    #[ORM\ManyToMany(targetEntity: AgenceBancaire::class, inversedBy: 'conseillerAgences')]
+    private Collection $Id_Agence;
 
-    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'IdConseiller')]
-    private Collection $ID_Agence;
+    #[ORM\ManyToMany(targetEntity: ConseillerBancaire::class, inversedBy: 'conseillerAgences')]
+    private Collection $Id_Conseiller;
 
     public function __construct()
     {
-        $this->IdConseiller = new ArrayCollection();
-        $this->ID_Agence = new ArrayCollection();
+        $this->Id_Agence = new ArrayCollection();
+        $this->Id_Conseiller = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -33,52 +33,49 @@ class ConseillerAgence
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection<int, AgenceBancaire>
      */
-    public function getIdConseiller(): Collection
+    public function getIdAgence(): Collection
     {
-        return $this->IdConseiller;
+        return $this->Id_Agence;
     }
 
-    public function addIdConseiller(self $idConseiller): static
+    public function addIdAgence(AgenceBancaire $idAgence): static
     {
-        if (!$this->IdConseiller->contains($idConseiller)) {
-            $this->IdConseiller->add($idConseiller);
+        if (!$this->Id_Agence->contains($idAgence)) {
+            $this->Id_Agence->add($idAgence);
         }
 
         return $this;
     }
 
-    public function removeIdConseiller(self $idConseiller): static
+    public function removeIdAgence(AgenceBancaire $idAgence): static
     {
-        $this->IdConseiller->removeElement($idConseiller);
+        $this->Id_Agence->removeElement($idAgence);
 
         return $this;
     }
 
     /**
-     * @return Collection<int, self>
+     * @return Collection<int, ConseillerBancaire>
      */
-    public function getIDAgence(): Collection
+    public function getIdConseiller(): Collection
     {
-        return $this->ID_Agence;
+        return $this->Id_Conseiller;
     }
 
-    public function addIDAgence(self $iDAgence): static
+    public function addIdConseiller(ConseillerBancaire $idConseiller): static
     {
-        if (!$this->ID_Agence->contains($iDAgence)) {
-            $this->ID_Agence->add($iDAgence);
-            $iDAgence->addIdConseiller($this);
+        if (!$this->Id_Conseiller->contains($idConseiller)) {
+            $this->Id_Conseiller->add($idConseiller);
         }
 
         return $this;
     }
 
-    public function removeIDAgence(self $iDAgence): static
+    public function removeIdConseiller(ConseillerBancaire $idConseiller): static
     {
-        if ($this->ID_Agence->removeElement($iDAgence)) {
-            $iDAgence->removeIdConseiller($this);
-        }
+        $this->Id_Conseiller->removeElement($idConseiller);
 
         return $this;
     }

@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\ClientCompte;
+use App\Entity\CompteLigne;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<ClientCompte>
+ * @extends ServiceEntityRepository<CompteLigne>
  *
- * @method ClientCompte|null find($id, $lockMode = null, $lockVersion = null)
- * @method ClientCompte|null findOneBy(array $criteria, array $orderBy = null)
- * @method ClientCompte[]    findAll()
- * @method ClientCompte[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method CompteLigne|null find($id, $lockMode = null, $lockVersion = null)
+ * @method CompteLigne|null findOneBy(array $criteria, array $orderBy = null)
+ * @method CompteLigne[]    findAll()
+ * @method CompteLigne[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClientCompteRepository extends ServiceEntityRepository
+class CompteLigneRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ClientCompte::class);
+        parent::__construct($registry, CompteLigne::class);
     }
 
 //    /**
-//     * @return ClientCompte[] Returns an array of ClientCompte objects
+//     * @return CompteLigne[] Returns an array of CompteLigne objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class ClientCompteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?ClientCompte
+//    public function findOneBySomeField($value): ?CompteLigne
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

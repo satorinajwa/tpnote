@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\LigneDeCompte;
+use App\Entity\LignesCompte;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<LigneDeCompte>
+ * @extends ServiceEntityRepository<LignesCompte>
  *
- * @method LigneDeCompte|null find($id, $lockMode = null, $lockVersion = null)
- * @method LigneDeCompte|null findOneBy(array $criteria, array $orderBy = null)
- * @method LigneDeCompte[]    findAll()
- * @method LigneDeCompte[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method LignesCompte|null find($id, $lockMode = null, $lockVersion = null)
+ * @method LignesCompte|null findOneBy(array $criteria, array $orderBy = null)
+ * @method LignesCompte[]    findAll()
+ * @method LignesCompte[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class LigneDeCompteRepository extends ServiceEntityRepository
+class LignesCompteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, LigneDeCompte::class);
+        parent::__construct($registry, LignesCompte::class);
     }
 
 //    /**
-//     * @return LigneDeCompte[] Returns an array of LigneDeCompte objects
+//     * @return LignesCompte[] Returns an array of LignesCompte objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class LigneDeCompteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?LigneDeCompte
+//    public function findOneBySomeField($value): ?LignesCompte
 //    {
 //        return $this->createQueryBuilder('l')
 //            ->andWhere('l.exampleField = :val')

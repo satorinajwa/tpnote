@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ConseillerBancaireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ConseillerBancaireRepository::class)]
@@ -17,10 +19,18 @@ class ConseillerBancaire
     private ?int $ID_Conseiller = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $prénom = null;
+    private ?string $Nom_Conseiller = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom_agence = null;
+    private ?string $Prenom_conseiller = null;
+
+    #[ORM\ManyToMany(targetEntity: ConseillerAgence::class, mappedBy: 'Id_Conseiller')]
+    private Collection $conseillerAgences;
+
+    public function __construct()
+    {
+        $this->conseillerAgences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -39,26 +49,53 @@ class ConseillerBancaire
         return $this;
     }
 
-    public function getPrénom(): ?string
+    public function getNomConseiller(): ?string
     {
-        return $this->prénom;
+        return $this->Nom_Conseiller;
     }
 
-    public function setPrénom(string $prénom): static
+    public function setNomConseiller(string $Nom_Conseiller): static
     {
-        $this->prénom = $prénom;
+        $this->Nom_Conseiller = $Nom_Conseiller;
 
         return $this;
     }
 
-    public function getNomAgence(): ?string
+    public function getPrenomConseiller(): ?string
     {
-        return $this->nom_agence;
+        return $this->Prenom_conseiller;
     }
 
-    public function setNomAgence(string $nom_agence): static
+    public function setPrenomConseiller(string $Prenom_conseiller): static
     {
-        $this->nom_agence = $nom_agence;
+        $this->Prenom_conseiller = $Prenom_conseiller;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ConseillerAgence>
+     */
+    public function getConseillerAgences(): Collection
+    {
+        return $this->conseillerAgences;
+    }
+
+    public function addConseillerAgence(ConseillerAgence $conseillerAgence): static
+    {
+        if (!$this->conseillerAgences->contains($conseillerAgence)) {
+            $this->conseillerAgences->add($conseillerAgence);
+            $conseillerAgence->addIdConseiller($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConseillerAgence(ConseillerAgence $conseillerAgence): static
+    {
+        if ($this->conseillerAgences->removeElement($conseillerAgence)) {
+            $conseillerAgence->removeIdConseiller($this);
+        }
 
         return $this;
     }

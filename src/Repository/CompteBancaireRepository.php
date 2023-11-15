@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\CompteBancaire;
+use App\Entity\Comptebancaire;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<CompteBancaire>
+ * @extends ServiceEntityRepository<Comptebancaire>
  *
- * @method CompteBancaire|null find($id, $lockMode = null, $lockVersion = null)
- * @method CompteBancaire|null findOneBy(array $criteria, array $orderBy = null)
- * @method CompteBancaire[]    findAll()
- * @method CompteBancaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Comptebancaire|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Comptebancaire|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Comptebancaire[]    findAll()
+ * @method Comptebancaire[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CompteBancaireRepository extends ServiceEntityRepository
+class ComptebancaireRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, CompteBancaire::class);
+        parent::__construct($registry, Comptebancaire::class);
     }
 
 //    /**
-//     * @return CompteBancaire[] Returns an array of CompteBancaire objects
+//     * @return Comptebancaire[] Returns an array of Comptebancaire objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class CompteBancaireRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?CompteBancaire
+//    public function findOneBySomeField($value): ?Comptebancaire
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

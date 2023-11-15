@@ -1,0 +1,28 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <title>{% block title %}Your Symfony App{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    {% endblock %}
+</head>
+<body>
+    {% block body %}
+    <h1>Détails du client</h1>
+  
+        <dl class="row">
+            <dt class="col-sm-3">Nom du client</dt>
+            <dd class="col-sm-9">{{ clients.Nom_Client }}</dd>
+            <dt class="col-sm-3">Prénom du client</dt>
+            <dd class="col-sm-9">{{ clients.Prenom_Client }}</dd>
+             <dt class="col-sm-3">adresse_client</dt>
+            <dd class="col-sm-9">{{ clients.Adresse_Client }}</dd>
+        </dl>
+    
+{% endblock %}
+</body>
+</html>

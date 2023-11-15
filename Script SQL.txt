@@ -1,0 +1,50 @@
+CREATE TABLE Comptebancaire(
+    ID_Compte INT AUTO_INCREMENT PRIMARY KEY,
+    Type_Compte ENUM('courant', 'épargne', 'joint', 'entreprise') NOT NULL,
+    Solde DECIMAL(15, 2) NOT NULL DEFAULT 0.00
+);
+CREATE TABLE Client(
+    ID_Client INT AUTO_INCREMENT PRIMARY KEY,
+    Nom_Client VARCHAR(100),
+    Prenom_Client VARCHAR(100),
+    Adresse_Client VARCHAR(100)   
+);
+CREATE TABLE LignesCompte (
+    ID_Ligne INT AUTO_INCREMENT PRIMARY KEY,
+    Date_de_transaction Date,
+    Montant_de_la_transaction DECIMAL(15, 2) NOT NULL,
+    FOREIGN KEY (ID_Compte) REFERENCES Comptebancaire(ID_Compte)
+);
+
+CREATE TABLE AgenceBancaire (
+    ID_Agence INT AUTO_INCREMENT PRIMARY KEY,
+   	Nom_agence VARCHAR(100),
+    Adresse_agence VARCHAR(255)
+    
+);
+
+CREATE TABLE ConseillerBancaire (
+    ID_Conseiller INT AUTO_INCREMENT PRIMARY KEY,
+    Nom_conseiller VARCHAR(100),
+    Prenom_conseiller VARCHAR(100),
+    Nom_Agence VARCHAR(100),
+    agence_id INT,
+    FOREIGN KEY (Id_Agence) REFERENCES AgenceBancaire(ID_Agence)
+);
+
+CREATE TABLE Compte_Ligne (
+    Id_ligne INT,
+    Id_Compte INT,
+    PRIMARY KEY (Id_ligne, Id_Compte),
+    FOREIGN KEY (Id_Compte) REFERENCES Comptebancaire(Id_Compte),
+    FOREIGN KEY (Id_ligne) REFERENCES LignesCompte(Id_ligne)
+);
+
+
+CREATE TABLE Conseiller_Agence (
+    Id_Agence INT,
+    Id_Conseiller INT,
+    PRIMARY KEY (Id_Conseiller, Id_Client),
+    FOREIGN KEY (Id_Conseiller) REFERENCES ConseillerBancaire(Id_Conseiller),
+    FOREIGN KEY (Id_Agence) REFERENCES AgenceBancaire(Id_Agence)
+);
